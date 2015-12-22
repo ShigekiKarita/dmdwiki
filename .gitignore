@@ -1,0 +1,8 @@
+*
+/*
+
+!.gitignore
+!dub.sdl
+!source
+!public
+!*.d

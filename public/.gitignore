@@ -1,0 +1,12 @@
+*
+/*
+!.gitignore
+
+!index.html
+!index.md
+!navigation.md
+!config.json
+
+# for demo
+!articles
+!assets

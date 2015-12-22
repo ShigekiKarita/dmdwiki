@@ -1,0 +1,6 @@
+name "dmdwiki"
+description "A simple vibe.d server application with MDwiki."
+copyright "Copyright © 2015, karita"
+authors "karita"
+dependency "vibe-d" version="~>0.7.23"
+versions "VibeDefaultMain"
