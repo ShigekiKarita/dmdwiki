@@ -5,5 +5,6 @@
 !.gitignore
 !dub.sdl
 !source
+!source/wiki
 !public
 !*.d
