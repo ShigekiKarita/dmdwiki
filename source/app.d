@@ -1,3 +1,5 @@
+import wiki.recent;
+
 import vibe.appmain;
 import vibe.http.fileserver;
 import vibe.http.router;
@@ -13,13 +15,29 @@ immutable articles = "./public/articles";
 auto recentArticles = "";
 void toRecent(scope HTTPServerRequest req, scope HTTPServerResponse res)
 {
-    import wiki;
     import std.file;
     import vibe.core.log;
-    recentArticles = createRecentLists(articles);
+    recentArticles = "# Recent changes\n" ~ dirToMarkdown(articles);
     logInfo(recentArticles);
     recentMD.write(recentArticles);
     res.redirect("/index.html#!recent.md");
+}
+
+
+immutable searchMD = "./public/search.md";
+immutable searchForm = q{
+<form action="search" method="post">
+  <input type="text" name="example">
+  <input type="submit" value="submit">
+</form>
+};
+
+void toSearch(scope HTTPServerRequest req, scope HTTPServerResponse res)
+{
+    // TODO: put text-form and POST query
+    import std.file;
+    searchMD.write(searchForm);
+    res.redirect("/index.html#!search.md");
 }
 
 shared static this()
@@ -30,8 +48,8 @@ shared static this()
 
     auto router = new URLRouter;
     router.get("/", &toIndex);
-    router.get("/index.html#!recent.md", &toRecent);
     router.get("/recent", &toRecent);
+    router.get("/search", &toSearch);
     router.get("*", serveStaticFiles("./public/",));
 
     listenHTTP(settings, router);
